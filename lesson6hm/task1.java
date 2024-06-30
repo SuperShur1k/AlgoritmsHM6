@@ -1,39 +1,41 @@
-package org.example.lesson7hm;
+package org.example.lesson6hm;
 
-import java.util.Stack;
-// Последовательность ([{}]) является правильной, а последовательности ([)], {()] правильными не являются. Докажите это используя стек!
+import java.util.ArrayList;
 
 public class task1 {
+//    а. Приведите пример использования амортизированного анализа в практике.
+//    Амортизированный анализ применяется, например, при управлении динамической памятью в операционных системах или языках программирования.
+//    Одним из классических примеров является динамический массив,
+//    где операция добавления элемента в среднем выполняется за константное время (O(1)),
+//    несмотря на то, что иногда требуется перевыделение памяти и копирование данных, что занимает больше времени.
+
+//    В Java амортизированный анализ часто используется в различных структурах данных и алгоритмах
+//    для обеспечения эффективности операций в среднем случае. Один из примеров — динамический массив,
+//    реализованный в классе ArrayList.
+
     public static void main(String[] args) {
-        String sequence1 = "([{}])";
-        String sequence2 = "([)]";
-        String sequence3 = "{()]";
+        ArrayList<Integer> list = new ArrayList<>();
 
-        System.out.println(sequence1 + " is valid: " + isValid(sequence1));
-        System.out.println(sequence2 + " is valid: " + isValid(sequence2));
-        System.out.println(sequence3 + " is valid: " + isValid(sequence3));
-    }
-
-    public static boolean isValid(String s) {
-        Stack<Character> stack = new Stack<>();
-
-        for (char c : s.toCharArray()) {
-            if (c == '(' || c == '{' || c == '[') {
-                stack.push(c);
-            } else if (c == ')' || c == '}' || c == ']') {
-                if (stack.isEmpty()) {
-                    return false;
-                }
-                char top = stack.pop();
-
-                if ((c == ')' && top != '(') ||
-                        (c == '}' && top != '{') ||
-                        (c == ']' && top != '[')) {
-                    return false;
-                }
-            }
+        // Добавление элементов
+        for (int i = 0; i < 10; i++) {
+            list.add(i);
         }
 
-        return stack.isEmpty();
+        // Вывод элементов
+        System.out.println("Содержимое ArrayList:");
+        for (int num : list) {
+            System.out.print(num + " ");
+        }
+        System.out.println();
+
+        // Добавление еще одного элемента
+        list.add(10);
+
+        // Вывод элементов после добавления
+        System.out.println("Содержимое ArrayList после добавления:");
+        for (int num : list) {
+            System.out.print(num + " ");
+        }
+        System.out.println();
     }
 }
